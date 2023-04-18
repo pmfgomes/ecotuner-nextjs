@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import i18n from "i18next";
 import { fallbackLng } from "./app/i18n/settings";
+import { languages } from "./app/i18n/settings";
 
 function getDefaultLocale() {
   return fallbackLng;
@@ -11,7 +11,7 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Check if there is any supported locale in the pathname
-  const pathnameIsMissingLocale = i18n.languages.every(
+  const pathnameIsMissingLocale = languages.every(
     (locale: string) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
   );
 
