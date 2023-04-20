@@ -1,7 +1,19 @@
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import ReduxProvider from "@/components/client/ReduxProvider/ReduxProvider";
+import type { ILangPageParams } from "./langTypes";
+
+interface IRootLayoutProps {
+  children: React.ReactNode;
+  params: ILangPageParams;
+}
+
+export default async function RootLayout(props: IRootLayoutProps) {
+  const { children, params } = props;
+
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang={params.lang}>
+      <body>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   );
 }

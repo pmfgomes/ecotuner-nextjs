@@ -3,10 +3,6 @@ import type { NextRequest } from "next/server";
 import { fallbackLng } from "./app/i18n/settings";
 import { languages } from "./app/i18n/settings";
 
-function getDefaultLocale() {
-  return fallbackLng;
-}
-
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
@@ -17,11 +13,11 @@ export function middleware(request: NextRequest) {
 
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
-    const locale = getDefaultLocale();
+    const locale = fallbackLng;
 
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
-    return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url));
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   }
 }
 

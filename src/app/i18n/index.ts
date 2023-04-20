@@ -1,8 +1,7 @@
 import { createInstance } from "i18next";
 import resourcesToBackend from "i18next-resources-to-backend";
-import { initReactI18next } from "react-i18next";
-import { getOptions } from "./settings";
-import type { UseTranslationOptions } from "react-i18next";
+import { initReactI18next } from "react-i18next/initReactI18next";
+import { defaultNS, getOptions } from "./settings";
 
 const initI18next = async (lng: string, ns: string) => {
   // on server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
@@ -18,7 +17,7 @@ const initI18next = async (lng: string, ns: string) => {
   return i18nInstance;
 };
 
-export async function useTranslation(lng: string, ns: string, options: UseTranslationOptions) {
+export async function useTranslation(lng: string, ns = defaultNS, options = { keyPrefix: "" }) {
   const i18nextInstance = await initI18next(lng, ns);
 
   return {
